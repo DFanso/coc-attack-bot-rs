@@ -1,0 +1,55 @@
+[package]
+name = "coc-attack-bot"
+version = "0.1.0"
+edition = "2021"
+description = "Windows automation bot for Clash of Clans — attack recording, AI base analysis, auto-attacker"
+authors = ["DFanso"]
+license = "MIT"
+repository = "https://github.com/DFanso/coc-attack-bot-rs"
+
+[[bin]]
+name = "coc-attack-bot"
+path = "src/main.rs"
+
+[dependencies]
+# CLI / TUI
+anyhow = "1"
+thiserror = "2"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "local-time"] }
+tracing-appender = "0.2"
+time = { version = "0.3", features = ["macros", "formatting", "local-offset"] }
+
+# Config / JSON
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# HTTP (Gemini API)
+reqwest = { version = "0.12", features = ["blocking", "json", "rustls-tls"], default-features = false }
+base64 = "0.22"
+
+# Image processing (resize + JPEG/PNG encoding)
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+
+# Screen capture (cross-platform; works fine on Windows)
+xcap = "0.0.14"
+
+# Mouse / keyboard input simulation
+enigo = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_Graphics_Gdi",
+    "Win32_System_Threading",
+] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+opt-level = 3
