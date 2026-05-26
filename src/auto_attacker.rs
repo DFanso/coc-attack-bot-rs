@@ -267,12 +267,23 @@ fn find_good_loot_target(
         return false;
     }
 
+    let confirm_coord = coords.get("confirm_attack").copied();
+
     for attempt in 1..=max_attempts {
         if !is_running.load(Ordering::SeqCst) { return false; }
 
         tracing::info!("2️⃣ Clicking find_a_match at ({}, {}) — Attempt {attempt}/{max_attempts}",
                        find_coord.x, find_coord.y);
         let _ = click_at(find_coord.x, find_coord.y);
+        thread::sleep(Duration::from_secs(2));
+
+        // Optional: click the army-screen Attack button if the user has the
+        // army-confirmation step enabled. Required in modern CoC unless
+        // "skip army confirmation" is on.
+        if let Some(cc) = confirm_coord {
+            tracing::info!("2️⃣b Clicking confirm_attack (army screen) at ({}, {})", cc.x, cc.y);
+            let _ = click_at(cc.x, cc.y);
+        }
 
         tracing::info!("3️⃣ Waiting 5 seconds for base to load...");
         thread::sleep(Duration::from_secs(5));
@@ -328,11 +339,17 @@ fn search_for_good_base_cycle(
     let max_attempts = config.auto_attacker.max_search_attempts.max(1);
     let Some(find_coord) = coords.get("find_a_match").copied() else { return false; };
     let Some(next_coord) = coords.get("next_button").copied() else { return false; };
+    let confirm_coord = coords.get("confirm_attack").copied();
 
     for attempt in 1..=max_attempts {
         if !is_running.load(Ordering::SeqCst) { return false; }
         tracing::info!("2️⃣ Clicking find_a_match — Attempt {attempt}/{max_attempts}");
         let _ = click_at(find_coord.x, find_coord.y);
+        thread::sleep(Duration::from_secs(2));
+        if let Some(cc) = confirm_coord {
+            tracing::info!("2️⃣b Clicking confirm_attack at ({}, {})", cc.x, cc.y);
+            let _ = click_at(cc.x, cc.y);
+        }
         thread::sleep(Duration::from_secs(5));
 
         let Ok(Some(screenshot_path)) = screen_capture.capture_game_screen() else {

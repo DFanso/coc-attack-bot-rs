@@ -97,7 +97,11 @@ impl AttackRecorder {
     }
 
     pub fn stop_recording(&mut self) -> Option<PathBuf> {
-        if !self.is_recording() {
+        // Bug fix: don't gate on is_recording(). The recording thread may have
+        // already set it to false (e.g. user pressed F5/ESC inside the loop).
+        // In that case we still need to join the thread and save whatever
+        // actions were captured.
+        if self.thread.is_none() {
             tracing::warn!("No recording session active");
             return None;
         }
