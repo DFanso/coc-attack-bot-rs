@@ -1,0 +1,82 @@
+2026-05-26 00:50:23  INFO Logger initialized → logs\coc_bot_20260526.log
+2026-05-26 00:50:23  INFO Starting COC Attack Bot (Rust)...
+2026-05-26 00:50:23  INFO Configuration loaded from config.json
+2026-05-26 00:50:23  INFO Loaded 1 coordinate mappings
+============================================================
+        COC ATTACK BOT (Rust) — Windows Automation
+============================================================
+  Automated Clash of Clans attack recording and playback
+============================================================
+
+========================================
+           MAIN MENU
+========================================
+1. Coordinate Mapping
+2. Attack Recording
+3. Attack Playback
+4. Auto Attack System
+5. Game Detection
+6. Screenshots
+7. Settings
+8. Help
+9. Exit
+========================================
+
+Enter your choice: 
+========================================
+       COORDINATE MAPPING
+========================================
+1. Start coordinate mapping
+2. View mapped coordinates
+3. Export coordinates
+4. Import coordinates
+5. Back to main menu
+========================================
+Enter your choice: 
+=== COORDINATE MAPPING MODE ===
+Instructions:
+  1. Move mouse to the button you want to map
+  2. Press F2 to record the position
+  3. Enter a name for the button (in this terminal)
+  4. Repeat for all buttons
+  5. Press F3 to save all mappings
+  6. Press ESC or F1 to exit
+
+Starting in 3 seconds...
+
+Mouse at (398, 989). Enter button name: Recorded 'find_a_match' at (398, 989). Session mappings: 1
+
+Mouse at (3232, 1116). Enter button name: Recorded 'next_button' at (3232, 1116). Session mappings: 2
+
+Mouse at (196, 1116). Enter button name: Recorded 'end_button' at (196, 1116). Session mappings: 3
+2026-05-26 00:55:15  INFO Coordinates saved to coordinates\button_coordinates.json (4 total)
+
+Saved 3 new mappings
+
+Exiting mapping mode
+
+========================================
+       COORDINATE MAPPING
+========================================
+1. Start coordinate mapping
+2. View mapped coordinates
+3. Export coordinates
+4. Import coordinates
+5. Back to main menu
+========================================
+Enter your choice: 
+========================================
+           MAIN MENU
+========================================
+1. Coordinate Mapping
+2. Attack Recording
+3. Attack Playback
+4. Auto Attack System
+5. Game Detection
+6. Screenshots
+7. Settings
+8. Help
+9. Exit
+========================================
+
+Enter your choice: 2026-05-26 00:55:16  INFO Shutting down
